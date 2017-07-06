@@ -57,6 +57,8 @@ namespace AudioCreation
 
             emitterShape = AudioNodeEmitterShape.CreateOmnidirectional();
             emitter = new AudioNodeEmitter(emitterShape, decayModel, settings);
+
+            // Emitter initial position in physical units is (0, 20, 0) but visualization circle position is (0, 200) [see XAML]
             emitter.Position = new System.Numerics.Vector3(0, 20, 0);
 
             // Visualization object references
@@ -177,6 +179,10 @@ namespace AudioCreation
             var margin = emitter_circle.Margin;
             margin.Bottom = margin.Bottom + 10;
             emitter_circle.Margin = margin;
+
+            var pos = emitter.Position;
+            pos.Z += PixelsToMeters(10);
+            emitter.Position = pos;
         }
 
         private void OnDown(object sender, RoutedEventArgs e)
@@ -184,6 +190,10 @@ namespace AudioCreation
             var margin = emitter_circle.Margin;
             margin.Bottom = margin.Bottom - 10;
             emitter_circle.Margin = margin;
+
+            var pos = emitter.Position;
+            pos.Z -= PixelsToMeters(10);
+            emitter.Position = pos;
         }
 
         private void OnRight(object sender, RoutedEventArgs e)
@@ -191,6 +201,10 @@ namespace AudioCreation
             var margin = emitter_circle.Margin;
             margin.Right = margin.Right - 10;
             emitter_circle.Margin = margin;
+
+            var pos = emitter.Position;
+            pos.X += PixelsToMeters(10);
+            emitter.Position = pos;
         }
 
         private void OnLeft(object sender, RoutedEventArgs e)
@@ -198,6 +212,15 @@ namespace AudioCreation
             var margin = emitter_circle.Margin;
             margin.Right = margin.Right + 10;
             emitter_circle.Margin = margin;
+
+            var pos = emitter.Position;
+            pos.X -= PixelsToMeters(10);
+            emitter.Position = pos;
+        }
+
+        private int PixelsToMeters(int pixels)
+        {
+            return pixels / 10;
         }
 
         private void node_QuantumStarted(AudioFrameInputNode sender, FrameInputNodeQuantumStartedEventArgs args)
