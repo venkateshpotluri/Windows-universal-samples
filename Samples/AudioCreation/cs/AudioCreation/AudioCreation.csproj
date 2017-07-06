@@ -127,6 +127,9 @@
     <Compile Include="Scenario6_CustomEffects.xaml.cs">
       <DependentUpon>Scenario6_CustomEffects.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Scenario7_SpatialAudio.xaml.cs">
+      <DependentUpon>Scenario7_SpatialAudio.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -178,6 +181,10 @@
       <Link>Styles\Styles.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Scenario7_SpatialAudio.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
