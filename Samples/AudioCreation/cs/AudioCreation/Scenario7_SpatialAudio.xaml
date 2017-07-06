@@ -1,4 +1,16 @@
-﻿<Page
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
     x:Class="AudioCreation.Scenario7_SpatialAudio"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -9,5 +21,50 @@
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
+        <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="12,20,12,12">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackPanel Margin="0,0,0,10">
+                <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap" Text="This scenario demonstrates the spatial audio capabilities of the AudioGraph API." />
+            </StackPanel>
+
+            <RelativePanel Name="AudioCanvas" BorderBrush="Gray" BorderThickness="3" Grid.Row="1">
+                <Ellipse x:Name="Listener" Fill="White" Height="30" Width="30"
+                           RelativePanel.AlignHorizontalCenterWithPanel="true"
+                           RelativePanel.AlignVerticalCenterWithPanel="true"/>
+                <Polygon x:Name="ListenerHead" Fill="White" Points="15,-5 27,15 3,15"
+                           RelativePanel.AlignLeftWith="Listener"
+                           RelativePanel.AlignTopWith="Listener"/>
+                <Ellipse x:Name="Emitter" Fill="Red" Height="20" Width="20"  Margin="0,-200,0,0"
+                           RelativePanel.AlignVerticalCenterWith="Listener"
+                           RelativePanel.AlignHorizontalCenterWith="Listener"/>
+                <Ellipse x:Name="ButtonCircle" Fill="White" Opacity="0.5" Height="80" Width="80"
+                           RelativePanel.AlignVerticalCenterWith="Listener"
+                           RelativePanel.AlignHorizontalCenterWith="Listener"/>
+                <RepeatButton FontFamily="Marlett" Content="5" Height="25" Width="50"  Margin="0,-6,0,0" Background="Transparent"
+                           AutomationProperties.Name="Up" AutomationProperties.HelpText="Moves emitter up"
+                           Click="OnUp"
+                           RelativePanel.AlignTopWith="ButtonCircle"
+                           RelativePanel.AlignHorizontalCenterWith="Listener"/>
+                <RepeatButton FontFamily="Marlett" Content="6" Height="25" Width="50"  Margin="0,0,0,-6" Background="Transparent"
+                           Click="OnDown"
+                           AutomationProperties.Name="Down" AutomationProperties.HelpText="Moves emitter down"
+                           RelativePanel.AlignBottomWith="ButtonCircle"
+                           RelativePanel.AlignHorizontalCenterWith="Listener"/>
+                <RepeatButton FontFamily="Marlett" Content="4" Height="30" Width="35" Margin="0,0,-10,0" Background="Transparent"
+                           Click="OnRight"
+                           AutomationProperties.Name="Right" AutomationProperties.HelpText="Moves emitter right"
+                           RelativePanel.AlignRightWith="ButtonCircle"
+                           RelativePanel.AlignVerticalCenterWith="Listener"/>
+                <RepeatButton FontFamily="Marlett" Content="3" Height="30" Width="35" Margin="-10,0,0,0" Background="Transparent"
+                           Click="OnLeft"
+                           AutomationProperties.Name="Left" AutomationProperties.HelpText="Moves emitter left"
+                           RelativePanel.AlignLeftWith="ButtonCircle"
+                           RelativePanel.AlignVerticalCenterWith="Listener"/>
+            </RelativePanel>
+        </Grid>
     </Grid>
 </Page>

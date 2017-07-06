@@ -29,7 +29,7 @@ namespace SDKTemplate
             new Scenario() { Title="Inbox Effects", ClassType=typeof(Scenario5_InboxEffects)},
             new Scenario() { Title="Custom Effects", ClassType=typeof(Scenario6_CustomEffects)},
             new Scenario() { Title="Spatial Audio", ClassType=typeof(Scenario7_SpatialAudio)}
-                    };
+        };
     }
 
     public class Scenario

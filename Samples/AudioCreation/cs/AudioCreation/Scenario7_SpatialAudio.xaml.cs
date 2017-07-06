@@ -19,6 +19,8 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
+using Ellipse = Windows.UI.Xaml.Shapes.Ellipse;
+
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace AudioCreation
@@ -46,12 +48,28 @@ namespace AudioCreation
         public double theta = 0;
         private AudioDeviceOutputNode deviceOutputNode;
 
+        private Ellipse emitter_circle;
+        private RelativePanel audio_canvas;
+
         public Scenario7_SpatialAudio()
         {
             this.InitializeComponent();
+
             emitterShape = AudioNodeEmitterShape.CreateOmnidirectional();
             emitter = new AudioNodeEmitter(emitterShape, decayModel, settings);
             emitter.Position = new System.Numerics.Vector3(0, 20, 0);
+
+            // Visualization object references
+            emitter_circle = FindName("Emitter") as Ellipse;
+            if (emitter_circle == null)
+            {
+                throw new NullReferenceException("Emitter ellipse geometry not found");
+            }
+            audio_canvas = FindName("AudioCanvas") as RelativePanel;
+            if (audio_canvas == null)
+            {
+                throw new NullReferenceException("Audio Canvas not found");
+            }
         }
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
@@ -73,7 +91,6 @@ namespace AudioCreation
                 graph.Dispose();
             }
         }
-
 
         unsafe private AudioFrame GenerateAudioData(uint samples)
         {
@@ -155,6 +172,34 @@ namespace AudioCreation
             graph.Start();
         }
 
+        private void OnUp(object sender, RoutedEventArgs e)
+        {
+            var margin = emitter_circle.Margin;
+            margin.Bottom = margin.Bottom + 10;
+            emitter_circle.Margin = margin;
+        }
+
+        private void OnDown(object sender, RoutedEventArgs e)
+        {
+            var margin = emitter_circle.Margin;
+            margin.Bottom = margin.Bottom - 10;
+            emitter_circle.Margin = margin;
+        }
+
+        private void OnRight(object sender, RoutedEventArgs e)
+        {
+            var margin = emitter_circle.Margin;
+            margin.Right = margin.Right - 10;
+            emitter_circle.Margin = margin;
+        }
+
+        private void OnLeft(object sender, RoutedEventArgs e)
+        {
+            var margin = emitter_circle.Margin;
+            margin.Right = margin.Right + 10;
+            emitter_circle.Margin = margin;
+        }
+
         private void node_QuantumStarted(AudioFrameInputNode sender, FrameInputNodeQuantumStartedEventArgs args)
         {
             // GenerateAudioData can provide PCM audio data by directly synthesizing it or reading from a file.
@@ -168,6 +213,5 @@ namespace AudioCreation
                 frameInputNode.AddFrame(audioData);
             }
         }
-
     }
 }
