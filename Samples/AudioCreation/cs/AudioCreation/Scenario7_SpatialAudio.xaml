@@ -31,31 +31,37 @@
                 <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap" Text="This scenario demonstrates the spatial audio capabilities of the AudioGraph API." />
             </StackPanel>
 
-            <RelativePanel BorderBrush="Gray" BorderThickness="3" Grid.Row="1">
+            <RelativePanel Name="AudioCanvas" BorderBrush="Gray" BorderThickness="3" Grid.Row="1">
                 <Ellipse x:Name="Listener" Fill="White" Height="30" Width="30"
                            RelativePanel.AlignHorizontalCenterWithPanel="true"
                            RelativePanel.AlignVerticalCenterWithPanel="true"/>
                 <Polygon x:Name="ListenerHead" Fill="White" Points="15,-5 27,15 3,15"
                            RelativePanel.AlignLeftWith="Listener"
                            RelativePanel.AlignTopWith="Listener"/>
-                <Ellipse x:Name="Emitter" Fill="Red" Height="20" Width="20"/>
+                <Ellipse x:Name="Emitter" Fill="Red" Height="20" Width="20"  Margin="0,-200,0,0"
+                           RelativePanel.AlignVerticalCenterWith="Listener"
+                           RelativePanel.AlignHorizontalCenterWith="Listener"/>
                 <Ellipse x:Name="ButtonCircle" Fill="White" Opacity="0.5" Height="80" Width="80"
                            RelativePanel.AlignVerticalCenterWith="Listener"
                            RelativePanel.AlignHorizontalCenterWith="Listener"/>
-                <Button FontFamily="Marlett" Content="5" Height="25" Width="50"  Margin="0,-6,0,0" Background="Transparent"
+                <RepeatButton FontFamily="Marlett" Content="5" Height="25" Width="50"  Margin="0,-6,0,0" Background="Transparent"
                            AutomationProperties.Name="Up" AutomationProperties.HelpText="Moves emitter up"
+                           Click="OnUp"
                            RelativePanel.AlignTopWith="ButtonCircle"
                            RelativePanel.AlignHorizontalCenterWith="Listener"/>
-                <Button FontFamily="Marlett" Content="6" Height="25" Width="50"  Margin="0,0,0,-6" Background="Transparent"
+                <RepeatButton FontFamily="Marlett" Content="6" Height="25" Width="50"  Margin="0,0,0,-6" Background="Transparent"
+                           Click="OnDown"
                            AutomationProperties.Name="Down" AutomationProperties.HelpText="Moves emitter down"
                            RelativePanel.AlignBottomWith="ButtonCircle"
                            RelativePanel.AlignHorizontalCenterWith="Listener"/>
-                <Button FontFamily="Marlett" Content="4" Height="30" Width="35" Margin="0,0,-10,0" Background="Transparent"
-                            AutomationProperties.Name="Right" AutomationProperties.HelpText="Moves emitter right"
+                <RepeatButton FontFamily="Marlett" Content="4" Height="30" Width="35" Margin="0,0,-10,0" Background="Transparent"
+                           Click="OnRight"
+                           AutomationProperties.Name="Right" AutomationProperties.HelpText="Moves emitter right"
                            RelativePanel.AlignRightWith="ButtonCircle"
                            RelativePanel.AlignVerticalCenterWith="Listener"/>
-                <Button FontFamily="Marlett" Content="3" Height="30" Width="35" Margin="-10,0,0,0" Background="Transparent"
-                            AutomationProperties.Name="Left" AutomationProperties.HelpText="Moves emitter left"
+                <RepeatButton FontFamily="Marlett" Content="3" Height="30" Width="35" Margin="-10,0,0,0" Background="Transparent"
+                           Click="OnLeft"
+                           AutomationProperties.Name="Left" AutomationProperties.HelpText="Moves emitter left"
                            RelativePanel.AlignLeftWith="ButtonCircle"
                            RelativePanel.AlignVerticalCenterWith="Listener"/>
             </RelativePanel>

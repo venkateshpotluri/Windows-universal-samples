@@ -13,6 +13,8 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
+using Ellipse = Windows.UI.Xaml.Shapes.Ellipse;
+
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace AudioCreation
@@ -22,9 +24,52 @@ namespace AudioCreation
     /// </summary>
     public sealed partial class Scenario7_SpatialAudio : Page
     {
+        private Ellipse emitter_circle;
+        private RelativePanel audio_canvas;
+
         public Scenario7_SpatialAudio()
         {
             this.InitializeComponent();
+
+            // Visualization object references
+            emitter_circle = FindName("Emitter") as Ellipse;
+            if(emitter_circle == null)
+            {
+                throw new NullReferenceException("Emitter ellipse geometry not found");
+            }
+            audio_canvas = FindName("AudioCanvas") as RelativePanel;
+            if (audio_canvas == null)
+            {
+                throw new NullReferenceException("Audio Canvas not found");
+            }
+        }
+
+        private void OnUp(object sender, RoutedEventArgs e)
+        {
+            var margin = emitter_circle.Margin;
+            margin.Bottom = margin.Bottom + 10;
+            emitter_circle.Margin = margin;
+        }
+
+        private void OnDown(object sender, RoutedEventArgs e)
+        {
+            var margin = emitter_circle.Margin;
+            margin.Bottom = margin.Bottom - 10;
+            emitter_circle.Margin = margin;
+        }
+
+        private void OnRight(object sender, RoutedEventArgs e)
+        {
+            var margin = emitter_circle.Margin;
+            margin.Right = margin.Right - 10;
+            emitter_circle.Margin = margin;
+        }
+
+        private void OnLeft(object sender, RoutedEventArgs e)
+        {
+            var margin = emitter_circle.Margin;
+            margin.Right = margin.Right + 10;
+            emitter_circle.Margin = margin;
         }
     }
 }
